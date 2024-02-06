@@ -1,20 +1,24 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const ServiceRouter = require("./routers/servicesRouter");
-const connectDB = require("./config/connectDB")
+const connectDB = require("./config/connectDB");
+const cors = require('cors');
+const morgan = require('morgan');
 
 // callback Database
-connectDB()
+connectDB();
 
+app.use(morgan('dev'));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+app.use("/service",ServiceRouter);
 
-app.use('/service',ServiceRouter)
+app.use("/api/v1/users", require("./routers/userRouter"));
 
-
-app.listen(9753, () => {
-    console.log("Here http://localhost:9753");
+const PORT = 8080
+app.listen(PORT, () => {
+    console.log(`Here http://localhost:${PORT}`);
 });

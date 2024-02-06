@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ServiceSchema = new mongoose.Schema(
+const serviceSchema = new mongoose.Schema(
   {
     title: { type: String, requires: [true, "title is required"] },
     amount: { type: Number, requires: [true, "amount is required"] },
@@ -11,4 +11,4 @@ const ServiceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("service", ServiceSchema);
+module.exports = mongoose.model("service", serviceSchema);

@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
+const url = "mongodb://127.0.0.1:27017/MungNey"
 
-const url = "mongodb+srv://wattikorn:1234@cluster0.gsddzct.mongodb.net/?retryWrites=true&w=majority"
-
-const connectDB = () =>{
+const connectDB = async () =>{
     try{
-        mongoose.connect(url)
+        await mongoose.connect(url)
         console.log("connected successfully!!!")
     }
     catch(err){
