@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Form, Input, message } from "antd";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,16 +21,23 @@ const Login = () =>{
             message.error("something wrong")
         }
     }
+    
+    useEffect(()=>{
+        if(localStorage.getItem('user')){
+            navigate("/")
+            }
+        },[navigate]);
+
     return(
         <>
         <div className="login-page">
             {loading && <Spinner/>}
             <Form layout="vertical" onFinish={submitHandler}>
                 <h1>Login From</h1>
-                <Form.Item label="Email" name="Email">
+                <Form.Item label="email" name="email">
                     <Input type="email"/>
                 </Form.Item>
-                <Form.Item label="Password" name="Password">
+                <Form.Item label="password" name="password">
                     <Input type="password"/>
                 </Form.Item>
                 <div className="d-flex justify-content-between">

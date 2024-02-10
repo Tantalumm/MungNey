@@ -5,6 +5,7 @@ const loginController = async (req, res) => {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email, password });
     if (!user) {
+      console.log(email,password)
       return res.status(404).send("User Not Found");
     }
     res.status(200).json({
@@ -23,10 +24,7 @@ const loginController = async (req, res) => {
 const registerController = async (req, res) => {
   try {
     const newUser = new userModel(req.body);
-    console.log(await newUser.save())
-    const testUser = userModel({name:"test",email:"test01@gmail.com",password:"1234"})
-    console.log(req.body)
-    //await newUser.save();
+    await newUser.save();
     res.status(200).json({
       success: true,
       newUser,
