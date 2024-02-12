@@ -2,18 +2,15 @@ import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = ({Children}) => {
+const Layout = ({children}) => {
     return(
         <>
             <Header/>
             <div className="content">
-                {Children}
+                {children}
                 
             </div>
             <Footer/>
-            <div>
-
-            </div>
 
         </>
     );

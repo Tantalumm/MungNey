@@ -1,8 +1,8 @@
 const serviceModel = require("../modules/serviceModel.js");
 
-const getAllService = (req, res) => {
+const getAllservice = async (req, res) => {
   try {
-    const services = serviceModel.find({});
+    const services = await serviceModel.find({ userid: req.body.userid });
     res.status(200).json(services);
   } catch (err) {
     console.log(err);
@@ -10,10 +10,10 @@ const getAllService = (req, res) => {
   }
 };
 
-const addAllService = () => {
+const addAllservice = async (req, res) => {
   try {
     const newService = new serviceModel(req.body);
-    newService.save();
+    await newService.save();
     res.status(201).send("Service Created");
   } catch (err) {
     console.log(err);
@@ -21,4 +21,4 @@ const addAllService = () => {
   }
 };
 
-module.exports = { getAllService, addAllService };
+module.exports = { getAllservice, addAllservice };

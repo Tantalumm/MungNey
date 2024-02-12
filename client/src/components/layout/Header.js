@@ -16,8 +16,7 @@ const Header = () => {
     message.success('Logout Successfully')
     navigate('/login')
   }
-  return (
-    <>
+  return ( 
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <button
@@ -52,7 +51,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
-    </>
+    
   );
 };
 

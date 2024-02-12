@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 
 const serviceSchema = new mongoose.Schema(
   {
-    title: { type: String, requires: [true, "title is required"] },
-    amount: { type: Number, requires: [true, "amount is required"] },
-    description: { type: String, requires: [true, "amount is required"] },
-    status: { type: String, requires: [true, "status is required"] },
-    time: { type: String, requires: [true, "time is required"] },
+    userid: { type: String, required: true, },
+    title: { type: String, required: [true, "title is required"] },
+    amount: { type: Number, required: [true, "amount is required"] },
+    type: { type: String, required: [true, "type is required"] },
+    category: { type: String, required: [true, "category is required"] },
+    description: { type: String, required: [true, "amount is required"] },
+    date: { type: String, required: [true, "date is required"] },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("service", serviceSchema);
+module.exports = mongoose.model("services", serviceSchema);
