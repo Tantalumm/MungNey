@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
-import { FloatButton, Modal, Input, Form, Select, message, Table} from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { FloatButton, Modal, Input, Form, Select, message, Table } from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Spinner from "../components/layout/Spinner";
 
@@ -9,43 +9,58 @@ const Homepage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [allService, setAllservice] = useState([]);
+  const [editable, setEditable] = useState(null);
 
   const columns = [
     {
-      title : 'Date',
-      dataIndex : 'date'
+      title: "Date",
+      dataIndex: "date",
     },
     {
-      title : 'Title',
-      dataIndex : 'title'
+      title: "Title",
+      dataIndex: "title",
     },
     {
-      title : 'Amount',
-      dataIndex : 'amount'
+      title: "Amount",
+      dataIndex: "amount",
     },
     {
-      title : 'Type',
-      dataIndex : 'type'
+      title: "Type",
+      dataIndex: "type",
     },
     {
-      title : 'Category',
-      dataIndex : 'category'
+      title: "Category",
+      dataIndex: "category",
     },
     {
-      title : 'Action',
+      title: "Action",
+      render: (text, record) => (
+        <div>
+          <EditOutlined
+            onClick={() => {
+              setEditable(record);
+              setShowModal(true);
+            }}
+          />
+          <DeleteOutlined className="mx-2" onClick={() =>{
+            handleDelete(record);
+          }}/>
+        </div>
+      ),
     },
-  ]
+  ];
 
   const getAllservice = async () => {
-    try{
-      const user = JSON.parse(localStorage.getItem('user'));
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
-      const res = await axios.post("/services/get-service",{userid:user._id})
+      const res = await axios.post("/services/get-service", {
+        userid: user._id,
+      });
       setLoading(false);
       setAllservice(res.data);
       console.log(res.data);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       message.error("service Issue");
     }
@@ -53,43 +68,79 @@ const Homepage = () => {
 
   useEffect(() => {
     getAllservice();
-  },[])
+  }, []);
 
-  const handleSubmit = async (values) =>{
+ const handleDelete = async (record) =>{
     try{
-      const user = JSON.parse(localStorage.getItem('user'));
       setLoading(true)
-      await axios.post("/services/add-service" , {...values,userid:user._id})
-      message.success("add service successfully")
+      await axios.post("/services/delete-service",{serviceId:record._id})
+      message.success("delete service successfully")
       setLoading(false)
-      setShowModal(false)
     }
     catch(err){
       setLoading(false)
-      message.error("add service failed")
+      console.log(err)
+      message.error("unable to delete")
+
+
     }
-  }
+ }
+
+
+
+  const handleSubmit = async (values) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setLoading(true);
+      if (editable) {
+        await axios.post("/services/edit-service", {
+          payload: {
+            ...values,
+            userId: user._id,
+          },
+          serviceId: editable._id
+        });
+        setLoading(false);
+        message.success("update service successfully");
+      } else {
+        await axios.post("/services/add-service", {
+          ...values,
+          userid: user._id,
+        });
+        setLoading(false);
+        message.success("add service successfully");
+      }
+
+      setShowModal(false);
+      setEditable(null);
+    } catch (err) {
+      setLoading(false);
+      message.error("add service failed");
+    }
+  };
   return (
     <Layout>
-      {loading && <Spinner/>}
-      <div className="filters">
-        <div>
-          <FloatButton
-            icon={<PlusOutlined />}
-            onClick={() => setShowModal(true)}
-          />
-        </div>
+      {loading && <Spinner />}
+      <div>
+        <FloatButton
+          icon={<PlusOutlined />}
+          onClick={() => setShowModal(true)}
+        />
       </div>
       <div className="content">
-        <Table columns={columns} dataSource={allService}/>
+        <Table columns={columns} dataSource={allService} />
       </div>
       <Modal
-        title="Service"
+        title={editable ? "Edit Servcie" : "Add Service"}
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={false}
       >
-        <Form layout="vertical" onFinish={handleSubmit}>
+        <Form
+          layout="vertical"
+          onFinish={handleSubmit}
+          initialValues={editable}
+        >
           <Form.Item label="Title" name="title">
             <Input type="text" />
           </Form.Item>
