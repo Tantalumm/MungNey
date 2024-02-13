@@ -7,7 +7,7 @@ Websites related to personal finance can save, edit or delete recorded articles,
 - Frontend: ReactJS
 - Backend: Javascript(Node.js)
 - Database: MongoDB
-- Framework(fronted): Antd, Bootstrao
+- Framework(fronted): Antd, Bootstrap
 - Framework(backend): Express
 ## Getting Started
 
@@ -26,5 +26,5 @@ npm runs start
 
 3. Run backend and client together
 ```bash
-cd backend
+cd backend/
 npm run dev 
