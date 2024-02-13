@@ -42,9 +42,12 @@ const Homepage = () => {
               setShowModal(true);
             }}
           />
-          <DeleteOutlined className="mx-2" onClick={() =>{
-            handleDelete(record);
-          }}/>
+          <DeleteOutlined
+            className="mx-2"
+            onClick={() => {
+              handleDelete(record);
+            }}
+          />
         </div>
       ),
     },
@@ -70,23 +73,18 @@ const Homepage = () => {
     getAllservice();
   }, []);
 
- const handleDelete = async (record) =>{
-    try{
-      setLoading(true)
-      await axios.post("/services/delete-service",{serviceId:record._id})
-      message.success("delete service successfully")
-      setLoading(false)
+  const handleDelete = async (record) => {
+    try {
+      setLoading(true);
+      await axios.post("/services/delete-service", { serviceId: record._id });
+      message.success("delete service successfully");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      message.error("unable to delete");
     }
-    catch(err){
-      setLoading(false)
-      console.log(err)
-      message.error("unable to delete")
-
-
-    }
- }
-
-
+  };
 
   const handleSubmit = async (values) => {
     try {
@@ -98,7 +96,7 @@ const Homepage = () => {
             ...values,
             userId: user._id,
           },
-          serviceId: editable._id
+          serviceId: editable._id,
         });
         setLoading(false);
         message.success("update service successfully");

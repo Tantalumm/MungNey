@@ -22,26 +22,26 @@ const addAllservice = async (req, res) => {
 };
 
 const editService = async (req, res) => {
-  try{
-  await serviceModel.findOneAndUpdate({_id:req.body.serviceId}, req.body.payload);
-  res.status(200).send('Edit Successfully');
+  try {
+    await serviceModel.findOneAndUpdate(
+      { _id: req.body.serviceId },
+      req.body.payload
+    );
+    res.status(200).send("Edit Successfully");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
-  catch(err){
-    console.log(err)
-    res.status(500).json(err)
-  }
-}
+};
 
 const deleteService = async (req, res) => {
-  try{
-    await serviceModel.findByIdAndDelete({_id:req.body.serviceId})
-    res.status(200).send('Service Delete')
-
+  try {
+    await serviceModel.findByIdAndDelete({ _id: req.body.serviceId });
+    res.status(200).send("Service Delete");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
-  catch(err){
-    console.log(err)
-    res.status(500).json(err)
-  }
-}
+};
 
-module.exports = { getAllservice, addAllservice, editService, deleteService};
+module.exports = { getAllservice, addAllservice, editService, deleteService };
