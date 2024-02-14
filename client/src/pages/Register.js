@@ -22,27 +22,36 @@ const Register = () => {
     }
   };
   return (
-    <>
-      <div className="register-page">
-        {loading && <Spinner />}
-        <Form layout="vertical" onFinish={submitHandler}>
+    <div className="register-page">
+      {loading && <Spinner />}
+      <Form layout="vertical" onFinish={submitHandler}>
+        <div className="text-center">
           <h1>Register Form</h1>
-          <Form.Item label="Name" name="name">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Email" name="email">
-            <Input type="email" />
-          </Form.Item>
-          <Form.Item label="Password" name="password">
-            <Input type="password" />
-          </Form.Item>
-          <div className="d-flex justify-content-between">
-            <Link to="/login">Click Here to Login</Link>
-            <button className="btn btn-primary">Register</button>
-          </div>
-        </Form>
-      </div>
-    </>
+        </div>
+        <Form.Item label="Name" name="name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Email" name="email">
+          <Input type="email" />
+        </Form.Item>
+        <Form.Item label="Password" name="password">
+          <Input type="password" />
+        </Form.Item>
+        <div>
+          <button
+            className="btn btn-dark"
+            style={{ height: "50px", width: "300px" }}
+          >
+            Register
+          </button>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Link style={{ color: "black" }} to="/Login">
+            Click Here to Login
+          </Link>
+        </div>
+      </Form>
+    </div>
   );
 };
 

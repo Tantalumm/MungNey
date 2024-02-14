@@ -8,9 +8,11 @@ const Footer = () => {
         className="container"
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <GithubOutlined style={{fontSize: '30px'}}/>
+        <a href="https://github.com/Tantalumm" style={{color:"white"}}>
+          <GithubOutlined style={{ fontSize: "30px" }} />
+        </a>
+      </div>
     </div>
-  </div>
   );
 };
 

@@ -33,22 +33,36 @@ const Login = () => {
   }, [navigate]);
 
   return (
+    <body>
       <div className="login-page">
         {loading && <Spinner />}
-        <Form layout="vertical" onFinish={submitHandler}>
-          <h1>Login From</h1>
-          <Form.Item label="Email" name="email">
-            <Input type="email" />
-          </Form.Item>
-          <Form.Item label="Password" name="password">
-            <Input type="password" />
-          </Form.Item>
-          <div className="d-flex justify-content-between">
-            <Link to="/register">Click Here to Register</Link>
-            <button className="btn btn-primary">Login</button>
-          </div>
-        </Form>
+        <div>
+          <Form layout="vertical" onFinish={submitHandler}>
+            <div className="text-center">
+              <h1>Login Form</h1>
+            </div>
+
+            <Form.Item label="Email" name="email">
+              <Input type="email" />
+            </Form.Item>
+            <Form.Item label="Password" name="password">
+              <Input type="password" />
+            </Form.Item>
+            <div>
+              <button
+                className="btn btn-dark"
+                style={{ height: "50px", width: "300px" }}
+              >
+                Login
+              </button>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link style={{color:"black"}} to="/register">Click Here to Register</Link>
+            </div>
+          </Form>
+        </div>
       </div>
+    </body>
   );
 };
 
