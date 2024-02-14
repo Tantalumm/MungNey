@@ -17,7 +17,7 @@ const Header = () => {
     navigate("/login");
   };
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
@@ -36,8 +36,7 @@ const Header = () => {
           </Link>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              {" "}
-              <p className="nav-link">{loginUser && loginUser.name}</p>{" "}
+              <a className="nav-link disable" href="/">{loginUser && loginUser.name}</a>
             </li>
             <li className="nav-item">
               <button className="btn btn-primary" onClick={logoutHandler}>

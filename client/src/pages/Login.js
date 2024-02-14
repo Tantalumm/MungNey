@@ -33,7 +33,6 @@ const Login = () => {
   }, [navigate]);
 
   return (
-    <>
       <div className="login-page">
         {loading && <Spinner />}
         <Form layout="vertical" onFinish={submitHandler}>
@@ -50,7 +49,6 @@ const Login = () => {
           </div>
         </Form>
       </div>
-    </>
   );
 };
 

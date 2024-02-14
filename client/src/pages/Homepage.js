@@ -116,6 +116,7 @@ const Homepage = () => {
       message.error("add service failed");
     }
   };
+
   return (
     <Layout>
       {loading && <Spinner />}
@@ -123,6 +124,7 @@ const Homepage = () => {
         <FloatButton
           icon={<PlusOutlined />}
           onClick={() => setShowModal(true)}
+          tooltip={<div>Add New</div>}
         />
       </div>
       <div className="content">

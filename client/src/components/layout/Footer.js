@@ -1,10 +1,16 @@
 import React from "react";
+import { GithubOutlined } from "@ant-design/icons";
 
 const Footer = () => {
   return (
-    <div className="bg-dark text-light p-4">
-      <h6 className="text-center">Allright </h6>
+    <div className="bg-dark text-light p-4 row">
+      <div
+        className="container"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <GithubOutlined style={{fontSize: '30px'}}/>
     </div>
+  </div>
   );
 };
 
